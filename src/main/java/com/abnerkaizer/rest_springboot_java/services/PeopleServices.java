@@ -1,7 +1,9 @@
 package com.abnerkaizer.rest_springboot_java.services;
 
-import com.abnerkaizer.rest_springboot_java.data.dto.PersonDTO;
+import com.abnerkaizer.rest_springboot_java.data.dto.v1.PersonDTO;
+import com.abnerkaizer.rest_springboot_java.data.dto.v2.PersonDTOV2;
 import com.abnerkaizer.rest_springboot_java.exception.ResourceNotFoundException;
+import com.abnerkaizer.rest_springboot_java.mapper.custom.PersonMapper;
 import com.abnerkaizer.rest_springboot_java.model.Person;
 import com.abnerkaizer.rest_springboot_java.repositories.PeopleRepository;
 import org.slf4j.Logger;
@@ -22,7 +24,10 @@ public class PeopleServices {
     private Logger logger = LoggerFactory.getLogger(PeopleServices.class.getName());
 
     @Autowired
-    PeopleRepository repository;
+    private PeopleRepository repository;
+
+    @Autowired
+    private PersonMapper converter;
 
 
     public List<PersonDTO> findAll() {
@@ -46,6 +51,14 @@ public class PeopleServices {
         var entity = parseObject(person, Person.class);
 
         return parseObject(repository.save(entity), PersonDTO.class);
+    }
+
+    public PersonDTOV2 createV2(PersonDTOV2 person) {
+
+        logger.info("Creating one Person V2!");
+        var entity = converter.convertDTOtoEntity(person);
+
+        return converter.convertEntityToDTO(repository.save(entity));
     }
 
     public PersonDTO update(PersonDTO person) {

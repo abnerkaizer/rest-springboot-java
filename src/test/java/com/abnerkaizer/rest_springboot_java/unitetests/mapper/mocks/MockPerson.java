@@ -3,7 +3,7 @@ package com.abnerkaizer.rest_springboot_java.unitetests.mapper.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.abnerkaizer.rest_springboot_java.data.dto.PersonDTO;
+import com.abnerkaizer.rest_springboot_java.data.dto.v1.PersonDTO;
 import com.abnerkaizer.rest_springboot_java.model.Person;
 
 public class MockPerson {

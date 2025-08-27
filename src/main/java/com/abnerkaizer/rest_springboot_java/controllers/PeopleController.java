@@ -1,6 +1,7 @@
 package com.abnerkaizer.rest_springboot_java.controllers;
 
-import com.abnerkaizer.rest_springboot_java.data.dto.PersonDTO;
+import com.abnerkaizer.rest_springboot_java.data.dto.v1.PersonDTO;
+import com.abnerkaizer.rest_springboot_java.data.dto.v2.PersonDTOV2;
 import com.abnerkaizer.rest_springboot_java.services.PeopleServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/people/v1")
 public class PeopleController {
 
     @Autowired
@@ -30,12 +31,22 @@ public class PeopleController {
     public PersonDTO findById(@PathVariable("id") Long id){
         return service.findById(id);
     }
+
     @PostMapping(
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public PersonDTO create(@RequestBody PersonDTO person){
         return service.create(person);
+    }
+
+    @PostMapping(
+            value = "/v2",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public PersonDTOV2 create(@RequestBody PersonDTOV2 person){
+        return service.createV2(person);
     }
 
     @PutMapping(
