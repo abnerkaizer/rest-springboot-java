@@ -15,5 +15,5 @@ spring:
     open-in-view: false
 logging:
   level:
-#    root: WARN
+    root: INFO
     com.abnerkaizer.rest_springboot_java: DEBUG

@@ -1,40 +1,38 @@
 package com.abnerkaizer.rest_springboot_java.services;
 
+import com.abnerkaizer.rest_springboot_java.controllers.PeopleController;
 import com.abnerkaizer.rest_springboot_java.data.dto.v1.PersonDTO;
-import com.abnerkaizer.rest_springboot_java.data.dto.v2.PersonDTOV2;
 import com.abnerkaizer.rest_springboot_java.exception.ResourceNotFoundException;
-import com.abnerkaizer.rest_springboot_java.mapper.custom.PersonMapper;
+import static com.abnerkaizer.rest_springboot_java.mapper.ObjectMapper.parseListObjects;
+import static com.abnerkaizer.rest_springboot_java.mapper.ObjectMapper.parseObject;
 import com.abnerkaizer.rest_springboot_java.model.Person;
 import com.abnerkaizer.rest_springboot_java.repositories.PeopleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-
-import static com.abnerkaizer.rest_springboot_java.mapper.ObjectMapper.parseListObjects;
-import static com.abnerkaizer.rest_springboot_java.mapper.ObjectMapper.parseObject;
 
 @Service
 public class PeopleServices {
 
-    private final AtomicLong counter = new AtomicLong();
-    private Logger logger = LoggerFactory.getLogger(PeopleServices.class.getName());
+    private final Logger logger = LoggerFactory.getLogger(PeopleServices.class.getName());
 
     @Autowired
-    private PeopleRepository repository;
-
-    @Autowired
-    private PersonMapper converter;
+    PeopleRepository repository;
 
 
     public List<PersonDTO> findAll() {
 
         logger.info("Finding all People!");
 
-        return parseListObjects(repository.findAll(), PersonDTO.class);
+        var persons = parseListObjects(repository.findAll(), PersonDTO.class);
+        persons.forEach(this::addHateoasLinks);
+        return persons;
     }
 
     public PersonDTO findById(Long id) {
@@ -42,7 +40,9 @@ public class PeopleServices {
 
         var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
-        return parseObject(entity, PersonDTO.class);
+        var dto =  parseObject(entity, PersonDTO.class);
+        addHateoasLinks(dto);
+        return dto;
     }
 
     public PersonDTO create(PersonDTO person) {
@@ -50,18 +50,13 @@ public class PeopleServices {
         logger.info("Creating one Person!");
         var entity = parseObject(person, Person.class);
 
-        return parseObject(repository.save(entity), PersonDTO.class);
-    }
-
-    public PersonDTOV2 createV2(PersonDTOV2 person) {
-
-        logger.info("Creating one Person V2!");
-        var entity = converter.convertDTOtoEntity(person);
-
-        return converter.convertEntityToDTO(repository.save(entity));
+        var dto = parseObject(repository.save(entity), PersonDTO.class);
+        addHateoasLinks(dto);
+        return dto;
     }
 
     public PersonDTO update(PersonDTO person) {
+
 
         logger.info("Updating one Person!");
         Person entity = repository.findById(person.getId())
@@ -72,7 +67,9 @@ public class PeopleServices {
         entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
 
-        return parseObject(repository.save(entity), PersonDTO.class);
+        var dto = parseObject(repository.save(entity), PersonDTO.class);
+        addHateoasLinks(dto);
+        return dto;
     }
 
     public void delete(Long id) {
@@ -82,5 +79,13 @@ public class PeopleServices {
         Person entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
         repository.delete(entity);
+    }
+
+    private void addHateoasLinks(PersonDTO dto) {
+        dto.add(linkTo(methodOn(PeopleController.class).findById(dto.getId())).withSelfRel().withType("GET"));
+        dto.add(linkTo(methodOn(PeopleController.class).findAll()).withRel("findAll").withType("GET"));
+        dto.add(linkTo(methodOn(PeopleController.class).create(dto)).withRel("create").withType("POST"));
+        dto.add(linkTo(methodOn(PeopleController.class).update(dto)).withRel("update").withType("PUT"));
+        dto.add(linkTo(methodOn(PeopleController.class).delete(dto.getId())).withRel("delete").withType("DELETE"));
     }
 }
