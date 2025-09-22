@@ -2,6 +2,7 @@ package com.abnerkaizer.rest_springboot_java.services;
 
 import com.abnerkaizer.rest_springboot_java.controllers.PeopleController;
 import com.abnerkaizer.rest_springboot_java.data.dto.v1.PersonDTO;
+import com.abnerkaizer.rest_springboot_java.exception.RequiredObjectIsNullException;
 import com.abnerkaizer.rest_springboot_java.exception.ResourceNotFoundException;
 import static com.abnerkaizer.rest_springboot_java.mapper.ObjectMapper.parseListObjects;
 import static com.abnerkaizer.rest_springboot_java.mapper.ObjectMapper.parseObject;
@@ -47,6 +48,8 @@ public class PeopleServices {
 
     public PersonDTO create(PersonDTO person) {
 
+        if (person == null) throw new RequiredObjectIsNullException();
+
         logger.info("Creating one Person!");
         var entity = parseObject(person, Person.class);
 
@@ -57,6 +60,7 @@ public class PeopleServices {
 
     public PersonDTO update(PersonDTO person) {
 
+        if (person == null) throw new RequiredObjectIsNullException();
 
         logger.info("Updating one Person!");
         Person entity = repository.findById(person.getId())
