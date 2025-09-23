@@ -16,4 +16,8 @@ spring:
 logging:
   level:
     root: INFO
-    com.abnerkaizer.rest_springboot_java: DEBUG
+#    com.abnerkaizer.rest_springboot_java: DEBUG
+spring-doc:
+  paths-to-match: /api/**/v1/**
+  swagger-ui:
+    use-root-path: true
