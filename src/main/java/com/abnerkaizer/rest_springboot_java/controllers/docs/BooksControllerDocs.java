@@ -1,6 +1,6 @@
 package com.abnerkaizer.rest_springboot_java.controllers.docs;
 
-import com.abnerkaizer.rest_springboot_java.data.dto.v1.BookDTO;
+import com.abnerkaizer.rest_springboot_java.data.dto.BookDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;

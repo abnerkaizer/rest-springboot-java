@@ -1,7 +1,7 @@
 package com.abnerkaizer.rest_springboot_java.services;
 
 import com.abnerkaizer.rest_springboot_java.controllers.BooksController;
-import com.abnerkaizer.rest_springboot_java.data.dto.v1.BookDTO;
+import com.abnerkaizer.rest_springboot_java.data.dto.BookDTO;
 import com.abnerkaizer.rest_springboot_java.exception.RequiredObjectIsNullException;
 import com.abnerkaizer.rest_springboot_java.exception.ResourceNotFoundException;
 import com.abnerkaizer.rest_springboot_java.model.Book;

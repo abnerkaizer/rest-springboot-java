@@ -1,4 +1,4 @@
-package com.abnerkaizer.rest_springboot_java.data.dto.v1;
+package com.abnerkaizer.rest_springboot_java.data.dto;
 
 import org.springframework.hateoas.RepresentationModel;
 

@@ -1,6 +1,6 @@
 package com.abnerkaizer.rest_springboot_java.services;
 
-import com.abnerkaizer.rest_springboot_java.data.dto.v1.PersonDTO;
+import com.abnerkaizer.rest_springboot_java.data.dto.PersonDTO;
 import com.abnerkaizer.rest_springboot_java.exception.RequiredObjectIsNullException;
 import com.abnerkaizer.rest_springboot_java.model.Person;
 import com.abnerkaizer.rest_springboot_java.repositories.PeopleRepository;

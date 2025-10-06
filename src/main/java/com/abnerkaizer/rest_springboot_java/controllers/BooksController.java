@@ -1,7 +1,7 @@
 package com.abnerkaizer.rest_springboot_java.controllers;
 
 import com.abnerkaizer.rest_springboot_java.controllers.docs.BooksControllerDocs;
-import com.abnerkaizer.rest_springboot_java.data.dto.v1.BookDTO;
+import com.abnerkaizer.rest_springboot_java.data.dto.BookDTO;
 import com.abnerkaizer.rest_springboot_java.services.BooksServices;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

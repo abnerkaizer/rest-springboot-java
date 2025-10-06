@@ -1,7 +1,7 @@
 package com.abnerkaizer.rest_springboot_java.services;
 
 import com.abnerkaizer.rest_springboot_java.controllers.PeopleController;
-import com.abnerkaizer.rest_springboot_java.data.dto.v1.PersonDTO;
+import com.abnerkaizer.rest_springboot_java.data.dto.PersonDTO;
 import com.abnerkaizer.rest_springboot_java.exception.RequiredObjectIsNullException;
 import com.abnerkaizer.rest_springboot_java.exception.ResourceNotFoundException;
 import static com.abnerkaizer.rest_springboot_java.mapper.ObjectMapper.parseListObjects;

@@ -1,7 +1,7 @@
 package com.abnerkaizer.rest_springboot_java.controllers;
 
 import com.abnerkaizer.rest_springboot_java.controllers.docs.PeopleControllerDocs;
-import com.abnerkaizer.rest_springboot_java.data.dto.v1.PersonDTO;
+import com.abnerkaizer.rest_springboot_java.data.dto.PersonDTO;
 import com.abnerkaizer.rest_springboot_java.services.PeopleServices;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

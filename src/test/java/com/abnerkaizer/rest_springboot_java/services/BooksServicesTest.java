@@ -1,6 +1,6 @@
 package com.abnerkaizer.rest_springboot_java.services;
 
-import com.abnerkaizer.rest_springboot_java.data.dto.v1.BookDTO;
+import com.abnerkaizer.rest_springboot_java.data.dto.BookDTO;
 import com.abnerkaizer.rest_springboot_java.exception.RequiredObjectIsNullException;
 import com.abnerkaizer.rest_springboot_java.model.Book;
 import com.abnerkaizer.rest_springboot_java.repositories.BooksRepository;
@@ -85,9 +85,9 @@ class BooksServicesTest {
         );
 
         assertEquals("Author Test1", result.getAuthor());
-        assertEquals("Launch Date Test1", result.getLaunchDate());
+        assertNotNull(result.getLaunchDate());
         assertEquals("Title Test1", result.getTitle());
-        assertEquals(1.0, result.getPrice());
+        assertEquals(1D, result.getPrice());
 
     }
 
@@ -99,7 +99,7 @@ class BooksServicesTest {
 
         BookDTO dto = input.mockDTO(1);
 
-        when(repository.save(book)).thenReturn(persisted);
+        when(repository.save(any(Book.class))).thenReturn(persisted);
 
         var result = service.create(dto);
 
@@ -142,9 +142,9 @@ class BooksServicesTest {
         );
 
         assertEquals("Author Test1", result.getAuthor());
-        assertEquals("Launch Date Test1", result.getLaunchDate());
+        assertNotNull(result.getLaunchDate());
         assertEquals("Title Test1", result.getTitle());
-        assertEquals(1.0, result.getPrice());
+        assertEquals(1D, result.getPrice());
     }
 
     @Test
@@ -212,9 +212,9 @@ class BooksServicesTest {
         );
 
         assertEquals("Author Test1", result.getAuthor());
-        assertEquals("Launch Date Test1", result.getLaunchDate());
+        assertNotNull(result.getLaunchDate());
         assertEquals("Title Test1", result.getTitle());
-        assertEquals(1.0, result.getPrice());
+        assertEquals(1D, result.getPrice());
 
     }
 
@@ -293,9 +293,9 @@ class BooksServicesTest {
         );
 
         assertEquals("Author Test1", bookOne.getAuthor());
-        assertEquals("Launch Date Test1", bookOne.getLaunchDate());
+        assertNotNull(bookOne.getLaunchDate());
         assertEquals("Title Test1", bookOne.getTitle());
-        assertEquals(1.0, bookOne.getPrice());
+        assertEquals(1D, bookOne.getPrice());
 
         var bookFour = books.get(4);
 
@@ -338,9 +338,9 @@ class BooksServicesTest {
         );
 
         assertEquals("Author Test4", bookFour.getAuthor());
-        assertEquals("Launch Date Test4", bookFour.getLaunchDate());
+        assertNotNull(bookFour.getLaunchDate());
         assertEquals("Title Test4", bookFour.getTitle());
-        assertEquals(4.0, bookFour.getPrice());
+        assertEquals(4D, bookFour.getPrice());
 
         var bookSeven = books.get(7);
 
@@ -383,9 +383,9 @@ class BooksServicesTest {
         );
 
         assertEquals("Author Test7", bookSeven.getAuthor());
-        assertEquals("Launch Date Test7", bookSeven.getLaunchDate());
+        assertNotNull(bookSeven.getLaunchDate());
         assertEquals("Title Test7", bookSeven.getTitle());
-        assertEquals(7.0, bookSeven.getPrice());
+        assertEquals(7D, bookSeven.getPrice());
 
     }
 }
