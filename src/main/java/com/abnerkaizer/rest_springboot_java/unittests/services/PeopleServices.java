@@ -1,4 +1,4 @@
-package com.abnerkaizer.rest_springboot_java.services;
+package com.abnerkaizer.rest_springboot_java.unittests.services;
 
 import com.abnerkaizer.rest_springboot_java.controllers.PeopleController;
 import com.abnerkaizer.rest_springboot_java.data.dto.PersonDTO;

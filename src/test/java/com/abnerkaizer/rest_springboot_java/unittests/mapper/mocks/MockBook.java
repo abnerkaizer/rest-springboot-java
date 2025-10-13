@@ -1,4 +1,4 @@
-package com.abnerkaizer.rest_springboot_java.unitetests.mapper.mocks;
+package com.abnerkaizer.rest_springboot_java.unittests.mapper.mocks;
 
 import com.abnerkaizer.rest_springboot_java.data.dto.BookDTO;
 import com.abnerkaizer.rest_springboot_java.model.Book;
