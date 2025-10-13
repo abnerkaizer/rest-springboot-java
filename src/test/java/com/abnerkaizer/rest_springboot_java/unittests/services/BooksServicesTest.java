@@ -4,6 +4,7 @@ import com.abnerkaizer.rest_springboot_java.data.dto.BookDTO;
 import com.abnerkaizer.rest_springboot_java.exception.RequiredObjectIsNullException;
 import com.abnerkaizer.rest_springboot_java.model.Book;
 import com.abnerkaizer.rest_springboot_java.repositories.BooksRepository;
+import com.abnerkaizer.rest_springboot_java.services.BooksServices;
 import com.abnerkaizer.rest_springboot_java.unittests.mapper.mocks.MockBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

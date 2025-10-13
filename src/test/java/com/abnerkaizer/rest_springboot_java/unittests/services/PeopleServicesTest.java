@@ -4,6 +4,7 @@ import com.abnerkaizer.rest_springboot_java.data.dto.PersonDTO;
 import com.abnerkaizer.rest_springboot_java.exception.RequiredObjectIsNullException;
 import com.abnerkaizer.rest_springboot_java.model.Person;
 import com.abnerkaizer.rest_springboot_java.repositories.PeopleRepository;
+import com.abnerkaizer.rest_springboot_java.services.PeopleServices;
 import com.abnerkaizer.rest_springboot_java.unittests.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
