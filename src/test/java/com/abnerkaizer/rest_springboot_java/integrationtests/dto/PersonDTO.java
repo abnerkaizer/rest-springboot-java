@@ -1,10 +1,13 @@
 package com.abnerkaizer.rest_springboot_java.integrationtests.dto;
 
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
+@XmlRootElement()
 public class PersonDTO implements Serializable {
 
     @Serial
