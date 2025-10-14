@@ -1,4 +1,4 @@
-package com.abnerkaizer.rest_springboot_java.integrationtests.controllers.withjson;
+package com.abnerkaizer.rest_springboot_java.integrationtests.controllers.cors.withjson;
 
 import com.abnerkaizer.rest_springboot_java.config.TestConfigs;
 import com.abnerkaizer.rest_springboot_java.integrationtests.dto.PersonDTO;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class PeopleControllerTest extends AbstractIntegrationTest {
+class PeopleControllerCorsTest extends AbstractIntegrationTest {
 
     private static RequestSpecification specification;
     private static ObjectMapper objectMapper;
@@ -73,6 +73,7 @@ class PeopleControllerTest extends AbstractIntegrationTest {
         assertEquals("Stallman",createdPerson.getLastName());
         assertEquals("New York City - NY - USA",createdPerson.getAddress());
         assertEquals("Male",createdPerson.getGender());
+        assertTrue(createdPerson.getEnabled());
     }
 
     @Test
@@ -134,6 +135,7 @@ class PeopleControllerTest extends AbstractIntegrationTest {
         assertEquals("Stallman",createdPerson.getLastName());
         assertEquals("New York City - NY - USA",createdPerson.getAddress());
         assertEquals("Male",createdPerson.getGender());
+        assertTrue(createdPerson.getEnabled());
     }
 
     @Test
@@ -165,5 +167,6 @@ class PeopleControllerTest extends AbstractIntegrationTest {
         person.setLastName("Stallman");
         person.setAddress("New York City - NY - USA");
         person.setGender("Male");
+        person.setEnabled(true);
     }
 }
