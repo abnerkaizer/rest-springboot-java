@@ -38,7 +38,7 @@ public class BooksController implements BooksControllerDocs {
             @RequestParam(value="direction", defaultValue = "asc") String direction
     ){
         var sortDirection = "desc".equalsIgnoreCase(direction) ? Sort.Direction.DESC : Sort.Direction.ASC;
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, "author"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, "title"));
         return ResponseEntity.ok(service.findAll(pageable));
     }
 

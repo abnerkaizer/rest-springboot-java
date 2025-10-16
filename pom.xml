@@ -14,7 +14,7 @@
 	<name>rest-springboot-java</name>
 	<properties>
 		<java.version>21</java.version>
-        <dozer.version>7.0.0</dozer.version>
+        <modelmapper.version>3.2.5</modelmapper.version>
         <springdoc.version>2.7.0</springdoc.version>
         <testcontainers.version>1.21.3</testcontainers.version>
         <rest-assured.version>5.5.6</rest-assured.version>
@@ -90,9 +90,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.dozermapper</groupId>
-            <artifactId>dozer-core</artifactId>
-            <version>${dozer.version}</version>
+            <groupId>org.modelmapper.extensions</groupId>
+            <artifactId>modelmapper-spring</artifactId>
+            <version>${modelmapper.version}</version>
         </dependency>
 
 		<dependency>

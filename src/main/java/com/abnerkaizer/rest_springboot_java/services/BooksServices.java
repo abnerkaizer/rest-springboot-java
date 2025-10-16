@@ -1,7 +1,6 @@
 package com.abnerkaizer.rest_springboot_java.services;
 
 import com.abnerkaizer.rest_springboot_java.controllers.BooksController;
-import com.abnerkaizer.rest_springboot_java.controllers.PeopleController;
 import com.abnerkaizer.rest_springboot_java.data.dto.BookDTO;
 import com.abnerkaizer.rest_springboot_java.exception.RequiredObjectIsNullException;
 import com.abnerkaizer.rest_springboot_java.exception.ResourceNotFoundException;
@@ -48,7 +47,7 @@ public class BooksServices {
         });
 
         Link findAllLink = WebMvcLinkBuilder.linkTo(
-                        WebMvcLinkBuilder.methodOn(PeopleController.class)
+                        WebMvcLinkBuilder.methodOn(BooksController.class)
                                 .findAll(
                                         pageable.getPageNumber(),
                                         pageable.getPageSize(),
