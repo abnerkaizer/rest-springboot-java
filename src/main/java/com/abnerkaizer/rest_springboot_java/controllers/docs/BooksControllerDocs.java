@@ -1,7 +1,6 @@
 package com.abnerkaizer.rest_springboot_java.controllers.docs;
 
 import com.abnerkaizer.rest_springboot_java.data.dto.BookDTO;
-import com.abnerkaizer.rest_springboot_java.data.dto.PersonDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 
 public interface BooksControllerDocs {
 

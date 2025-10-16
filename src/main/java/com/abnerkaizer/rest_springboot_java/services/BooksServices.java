@@ -3,7 +3,6 @@ package com.abnerkaizer.rest_springboot_java.services;
 import com.abnerkaizer.rest_springboot_java.controllers.BooksController;
 import com.abnerkaizer.rest_springboot_java.controllers.PeopleController;
 import com.abnerkaizer.rest_springboot_java.data.dto.BookDTO;
-import com.abnerkaizer.rest_springboot_java.data.dto.PersonDTO;
 import com.abnerkaizer.rest_springboot_java.exception.RequiredObjectIsNullException;
 import com.abnerkaizer.rest_springboot_java.exception.ResourceNotFoundException;
 import com.abnerkaizer.rest_springboot_java.model.Book;
@@ -23,9 +22,6 @@ import org.springframework.stereotype.Service;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-import java.util.List;
-
-import static com.abnerkaizer.rest_springboot_java.mapper.ObjectMapper.parseListObjects;
 import static com.abnerkaizer.rest_springboot_java.mapper.ObjectMapper.parseObject;
 
 @Service
