@@ -251,7 +251,7 @@ class PeopleServicesTest {
 
         List<Person> list = input.mockEntityList();
         when(repository.findAll()).thenReturn(list);
-        List<PersonDTO> people = new ArrayList<>();//service.findAll(pageable);
+        List<PersonDTO> people = new ArrayList<>();// service.findAll(pageable);
 
         assertNotNull(people);
         assertEquals(14, people.size());
