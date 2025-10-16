@@ -49,7 +49,8 @@ public class PeopleServices {
 
         Link findAllLink = WebMvcLinkBuilder.linkTo(
                 WebMvcLinkBuilder.methodOn(PeopleController.class)
-                        .findAll(pageable.getPageNumber(),
+                        .findAll(
+                                pageable.getPageNumber(),
                                 pageable.getPageSize(),
                                 String.valueOf(pageable.getSort())))
                 .withSelfRel();
