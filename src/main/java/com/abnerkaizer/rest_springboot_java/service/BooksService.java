@@ -1,11 +1,11 @@
-package com.abnerkaizer.rest_springboot_java.services;
+package com.abnerkaizer.rest_springboot_java.service;
 
 import com.abnerkaizer.rest_springboot_java.controllers.BooksController;
 import com.abnerkaizer.rest_springboot_java.data.dto.BookDTO;
 import com.abnerkaizer.rest_springboot_java.exception.RequiredObjectIsNullException;
 import com.abnerkaizer.rest_springboot_java.exception.ResourceNotFoundException;
 import com.abnerkaizer.rest_springboot_java.model.Book;
-import com.abnerkaizer.rest_springboot_java.repositories.BooksRepository;
+import com.abnerkaizer.rest_springboot_java.repository.BooksRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +24,9 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import static com.abnerkaizer.rest_springboot_java.mapper.ObjectMapper.parseObject;
 
 @Service
-public class BooksServices {
+public class BooksService {
 
-    private final Logger logger = LoggerFactory.getLogger(BooksServices.class.getName());
+    private final Logger logger = LoggerFactory.getLogger(BooksService.class.getName());
     
     @Autowired
     BooksRepository repository;

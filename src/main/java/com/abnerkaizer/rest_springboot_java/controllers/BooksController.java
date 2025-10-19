@@ -2,7 +2,7 @@ package com.abnerkaizer.rest_springboot_java.controllers;
 
 import com.abnerkaizer.rest_springboot_java.controllers.docs.BooksControllerDocs;
 import com.abnerkaizer.rest_springboot_java.data.dto.BookDTO;
-import com.abnerkaizer.rest_springboot_java.services.BooksServices;
+import com.abnerkaizer.rest_springboot_java.service.BooksService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class BooksController implements BooksControllerDocs {
     
     @Autowired
-    private BooksServices service;
+    private BooksService service;
 
     @GetMapping(
             produces = {

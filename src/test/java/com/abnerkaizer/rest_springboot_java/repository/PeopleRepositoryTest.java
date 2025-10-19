@@ -1,4 +1,4 @@
-package com.abnerkaizer.rest_springboot_java.repositories;
+package com.abnerkaizer.rest_springboot_java.repository;
 
 import com.abnerkaizer.rest_springboot_java.integrationtests.testcontainers.AbstractIntegrationTest;
 import com.abnerkaizer.rest_springboot_java.model.Person;

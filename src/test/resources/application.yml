@@ -2,6 +2,8 @@ server:
   port: 8888
 cors:
   originPatterns: http://localhost:8080,http://localhost:3000,https://abnerkaizer.com
+#file:
+#  upload-dir: /home/abner/Projects/UploadDir
 spring:
   application:
     name: rest-springboot-java
@@ -14,6 +16,12 @@ spring:
       hibernate:
     show-sql: false
     open-in-view: false
+#  servlet:
+#    multipart:
+#      enabled: true
+#      file-size-threshold: 2KB
+#      mas-file-size: 200MB
+#      max-request-size: 215MB
 logging:
   level:
     root: INFO

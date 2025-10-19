@@ -1,4 +1,4 @@
-package com.abnerkaizer.rest_springboot_java.services;
+package com.abnerkaizer.rest_springboot_java.service;
 
 import com.abnerkaizer.rest_springboot_java.controllers.PeopleController;
 import com.abnerkaizer.rest_springboot_java.data.dto.PersonDTO;
@@ -6,7 +6,7 @@ import com.abnerkaizer.rest_springboot_java.exception.RequiredObjectIsNullExcept
 import com.abnerkaizer.rest_springboot_java.exception.ResourceNotFoundException;
 import static com.abnerkaizer.rest_springboot_java.mapper.ObjectMapper.parseObject;
 import com.abnerkaizer.rest_springboot_java.model.Person;
-import com.abnerkaizer.rest_springboot_java.repositories.PeopleRepository;
+import com.abnerkaizer.rest_springboot_java.repository.PeopleRepository;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +24,9 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PeopleServices {
+public class PeopleService {
 
-    private final Logger logger = LoggerFactory.getLogger(PeopleServices.class.getName());
+    private final Logger logger = LoggerFactory.getLogger(PeopleService.class.getName());
 
     @Autowired
     PeopleRepository repository;
