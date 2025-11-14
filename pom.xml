@@ -14,9 +14,9 @@
 	<name>rest-springboot-java</name>
 	<properties>
 		<java.version>21</java.version>
-        <modelmapper.version>3.2.5</modelmapper.version>
-        <springdoc.version>2.8.13</springdoc.version>
-        <testcontainers.version>2.0.1</testcontainers.version>
+        <modelmapper.version>3.2.6</modelmapper.version>
+        <springdoc.version>2.8.14</springdoc.version>
+        <testcontainers.version>2.0.2</testcontainers.version>
         <rest-assured.version>5.5.6</rest-assured.version>
         <junit.version>4.13.2</junit.version>
         <commons-csv.version>1.14.1</commons-csv.version>
