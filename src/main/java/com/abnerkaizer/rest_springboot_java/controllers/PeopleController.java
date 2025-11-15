@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 //@CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -53,7 +54,8 @@ public class PeopleController implements PeopleControllerDocs {
     @GetMapping(value = "/exportPage",
             produces = {
                     MediaTypes.APPLICATION_CSV_VALUE,
-                    MediaTypes.APPLICATION_XLSX_VALUE
+                    MediaTypes.APPLICATION_XLSX_VALUE,
+                    MediaTypes.APPLICATION_PDF_VALUE
             }
     )
 
@@ -69,8 +71,14 @@ public class PeopleController implements PeopleControllerDocs {
         String acceptHeader = request.getHeader(HttpHeaders.ACCEPT);
         Resource file = service.exportPage(pageable, acceptHeader);
 
+        Map<String,String> extensionMap = Map.of(
+                MediaTypes.APPLICATION_XLSX_VALUE, ".xlsx",
+                MediaTypes.APPLICATION_CSV_VALUE, ".csv",
+                MediaTypes.APPLICATION_PDF_VALUE, ".pdf"
+        );
+
+        String fileExtension = extensionMap.getOrDefault(acceptHeader,"");
         String contentType = acceptHeader != null ? acceptHeader : "application/octet-stream";
-        String fileExtension = MediaTypes.APPLICATION_XLSX_VALUE.equalsIgnoreCase(acceptHeader) ? ".xlsx" : ".csv";
         String filename = "people_exported".concat(fileExtension);
 
 
