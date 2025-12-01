@@ -156,7 +156,7 @@ class BooksControllerXmlTest extends AbstractIntegrationTest {
 
         var content = given(specification)
                 .contentType(MediaType.APPLICATION_XML_VALUE)
-                .queryParams("page", 0, "size", 12, "direction", "asc")
+                .queryParams("page", 9, "size", 12, "direction", "asc")
                 .when()
                 .get()
                 .then()
@@ -173,20 +173,20 @@ class BooksControllerXmlTest extends AbstractIntegrationTest {
         assertNotNull(bookOne.getId());
         assertTrue(bookOne.getId() > 0);
 
-        assertEquals("Craig Larman", bookOne.getAuthor());
+        assertEquals("James Shore e Shane Warden", bookOne.getAuthor());
         assertNotNull(bookOne.getLaunchDate());
-        assertEquals("Agile and Iterative Development: A Manager’s Guide", bookOne.getTitle());
-        assertEquals(144.98, bookOne.getPrice());
+        assertEquals("The Art of Agile Development", bookOne.getTitle());
+        assertEquals(97.21, bookOne.getPrice());
 
         BookDTO bookFour = books.get(3);
 
         assertNotNull(bookFour.getId());
         assertTrue(bookFour.getId() > 0);
 
-        assertEquals("Craig Larman", bookFour.getAuthor());
+        assertEquals("James Shore e Shane Warden", bookFour.getAuthor());
         assertNotNull(bookFour.getLaunchDate());
-        assertEquals("Agile and Iterative Development: A Manager’s Guide", bookFour.getTitle());
-        assertEquals(43.82, bookFour.getPrice());
+        assertEquals("The Art of Agile Development", bookFour.getTitle());
+        assertEquals(110.18, bookFour.getPrice());
     }
 
     private void mockBook() {
