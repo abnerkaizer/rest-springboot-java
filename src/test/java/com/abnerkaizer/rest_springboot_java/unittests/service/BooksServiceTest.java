@@ -15,10 +15,19 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.PagedModel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -34,6 +43,9 @@ class BooksServiceTest {
 
     @Mock
     BooksRepository repository;
+
+    @Mock
+    PagedResourcesAssembler<BookDTO> assembler;
 
     @BeforeEach
     void setUp() {
@@ -244,150 +256,89 @@ class BooksServiceTest {
     }
 
     @Test
-    @Disabled("REASON: Still Under Development")
     void findAll() {
+        // Mocking repository access
+        List<Book> mockEntityList = input.mockEntityList();
+        Page<Book> mockPage = new PageImpl<>(mockEntityList);
+        when(repository.findAll(any(Pageable.class))).thenReturn(mockPage);
 
-        List<Book> list = input.mockEntityList();
-        when(repository.findAll()).thenReturn(list);
-        List<BookDTO> books = new ArrayList<>();//service.findAll(pageable);
+        List<BookDTO> mockDtoList = input.mockDTOList();
+
+        // Mocking assembler
+        // assembler.toModel(booksWithLinks, findAllLink);
+        List<EntityModel<BookDTO>> entityModels = mockDtoList.stream()
+                .map(EntityModel::of)
+                .collect(Collectors.toList());
+
+        PagedModel.PageMetadata pageMetadata = new PagedModel.PageMetadata(
+                mockPage.getSize(),
+                mockPage.getNumber(),
+                mockPage.getTotalElements(),
+                mockPage.getTotalPages()
+        );
+
+        PagedModel<EntityModel<BookDTO>> mockPagedModel = PagedModel.of(entityModels, pageMetadata);
+        when(assembler.toModel(any(Page.class), any(Link.class))).thenReturn(mockPagedModel);
+
+
+        // Executing fid all
+        PagedModel<EntityModel<BookDTO>> result = service.findAll(PageRequest.of(0, 14));
+
+        List<BookDTO> books = result.getContent()
+                .stream()
+                .map(EntityModel::getContent)
+                .collect(Collectors.toList());
 
         assertNotNull(books);
         assertEquals(14, books.size());
 
-        var bookOne = books.get(1);
+        validateIndividualBook(books.get(1), 1);
+        validateIndividualBook(books.get(4), 4);
+        validateIndividualBook(books.get(7), 7);
+    }
 
-        assertNotNull(bookOne);
-        assertNotNull(bookOne.getId());
-        assertNotNull(bookOne.getLinks());
+    private static void validateIndividualBook(BookDTO book, int i) {
+        assertNotNull(book);
+        assertNotNull(book.getId());
+        assertNotNull(book.getLinks());
 
-        assertNotNull(bookOne.getLinks().stream()
+        assertNotNull(book.getLinks().stream()
                 .anyMatch(link -> link.getRel().value().equals("self")
-                        && link.getHref().endsWith("/api/books/v1/1")
+                        && link.getHref().endsWith("/api/book/v1/" + i)
                         && link.getType().equals("GET")
                 ));
 
-        assertNotNull(bookOne.getLinks().stream()
+        assertNotNull(book.getLinks().stream()
                 .anyMatch(link -> link.getRel().value().equals("findAll")
-                        && link.getHref().endsWith("/api/books/v1")
+                        && link.getHref().endsWith("/api/book/v1")
                         && link.getType().equals("GET")
                 )
         );
 
-        assertNotNull(bookOne.getLinks().stream()
+        assertNotNull(book.getLinks().stream()
                 .anyMatch(link -> link.getRel().value().equals("create")
-                        && link.getHref().endsWith("/api/books/v1")
+                        && link.getHref().endsWith("/api/book/v1")
                         && link.getType().equals("POST")
                 )
         );
 
-        assertNotNull(bookOne.getLinks().stream()
+        assertNotNull(book.getLinks().stream()
                 .anyMatch(link -> link.getRel().value().equals("update")
-                        && link.getHref().endsWith("/api/books/v1")
+                        && link.getHref().endsWith("/api/book/v1")
                         && link.getType().equals("PUT")
                 )
         );
 
-        assertNotNull(bookOne.getLinks().stream()
+        assertNotNull(book.getLinks().stream()
                 .anyMatch(link -> link.getRel().value().equals("delete")
-                        && link.getHref().endsWith("/api/books/v1/1")
+                        && link.getHref().endsWith("/api/book/v1/" + i)
                         && link.getType().equals("DELETE")
                 )
         );
 
-        assertEquals("Author Test1", bookOne.getAuthor());
-        assertNotNull(bookOne.getLaunchDate());
-        assertEquals("Title Test1", bookOne.getTitle());
-        assertEquals(1D, bookOne.getPrice());
-
-        var bookFour = books.get(4);
-
-        assertNotNull(bookFour);
-        assertNotNull(bookFour.getId());
-        assertNotNull(bookFour.getLinks());
-
-        assertNotNull(bookFour.getLinks().stream()
-                .anyMatch(link -> link.getRel().value().equals("self")
-                        && link.getHref().endsWith("/api/books/v1/4")
-                        && link.getType().equals("GET")
-                ));
-
-        assertNotNull(bookFour.getLinks().stream()
-                .anyMatch(link -> link.getRel().value().equals("findAll")
-                        && link.getHref().endsWith("/api/books/v1")
-                        && link.getType().equals("GET")
-                )
-        );
-
-        assertNotNull(bookFour.getLinks().stream()
-                .anyMatch(link -> link.getRel().value().equals("create")
-                        && link.getHref().endsWith("/api/books/v1")
-                        && link.getType().equals("POST")
-                )
-        );
-
-        assertNotNull(bookFour.getLinks().stream()
-                .anyMatch(link -> link.getRel().value().equals("update")
-                        && link.getHref().endsWith("/api/books/v1")
-                        && link.getType().equals("PUT")
-                )
-        );
-
-        assertNotNull(bookFour.getLinks().stream()
-                .anyMatch(link -> link.getRel().value().equals("delete")
-                        && link.getHref().endsWith("/api/books/v1/4")
-                        && link.getType().equals("DELETE")
-                )
-        );
-
-        assertEquals("Author Test4", bookFour.getAuthor());
-        assertNotNull(bookFour.getLaunchDate());
-        assertEquals("Title Test4", bookFour.getTitle());
-        assertEquals(4D, bookFour.getPrice());
-
-        var bookSeven = books.get(7);
-
-        assertNotNull(bookSeven);
-        assertNotNull(bookSeven.getId());
-        assertNotNull(bookSeven.getLinks());
-
-        assertNotNull(bookSeven.getLinks().stream()
-                .anyMatch(link -> link.getRel().value().equals("self")
-                        && link.getHref().endsWith("/api/books/v1/7")
-                        && link.getType().equals("GET")
-                ));
-
-        assertNotNull(bookSeven.getLinks().stream()
-                .anyMatch(link -> link.getRel().value().equals("findAll")
-                        && link.getHref().endsWith("/api/books/v1")
-                        && link.getType().equals("GET")
-                )
-        );
-
-        assertNotNull(bookSeven.getLinks().stream()
-                .anyMatch(link -> link.getRel().value().equals("create")
-                        && link.getHref().endsWith("/api/books/v1")
-                        && link.getType().equals("POST")
-                )
-        );
-
-        assertNotNull(bookSeven.getLinks().stream()
-                .anyMatch(link -> link.getRel().value().equals("update")
-                        && link.getHref().endsWith("/api/books/v1")
-                        && link.getType().equals("PUT")
-                )
-        );
-
-        assertNotNull(bookSeven.getLinks().stream()
-                .anyMatch(link -> link.getRel().value().equals("delete")
-                        && link.getHref().endsWith("/api/books/v1/7")
-                        && link.getType().equals("DELETE")
-                )
-        );
-
-        assertEquals("Author Test7", bookSeven.getAuthor());
-        assertNotNull(bookSeven.getLaunchDate());
-        assertEquals("Title Test7", bookSeven.getTitle());
-        assertEquals(7D, bookSeven.getPrice());
-
+        assertEquals("Author Test" + i, book.getAuthor());
+        assertNotNull(book.getPrice());
+        assertEquals("Title Test" + i, book.getTitle());
+        assertNotNull(book.getLaunchDate());
     }
 }

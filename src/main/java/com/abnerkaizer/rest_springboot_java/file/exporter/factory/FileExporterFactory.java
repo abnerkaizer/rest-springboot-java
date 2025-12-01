@@ -2,7 +2,7 @@ package com.abnerkaizer.rest_springboot_java.file.exporter.factory;
 
 import com.abnerkaizer.rest_springboot_java.exception.BadRequestException;
 import com.abnerkaizer.rest_springboot_java.file.exporter.MediaTypes;
-import com.abnerkaizer.rest_springboot_java.file.exporter.contract.FileExporter;
+import com.abnerkaizer.rest_springboot_java.file.exporter.contract.PersonExporter;
 import com.abnerkaizer.rest_springboot_java.file.exporter.impl.CsvExporter;
 import com.abnerkaizer.rest_springboot_java.file.exporter.impl.PdfExporter;
 import com.abnerkaizer.rest_springboot_java.file.exporter.impl.XlsxExporter;
@@ -20,7 +20,7 @@ public class FileExporterFactory {
     @Autowired
     private ApplicationContext context;
 
-    public FileExporter getExporter(String acceptHeader) throws Exception{
+    public PersonExporter getExporter(String acceptHeader) throws Exception{
         logger.info("Exporting file!");
 
         if (acceptHeader.equalsIgnoreCase(MediaTypes.APPLICATION_XLSX_VALUE)){

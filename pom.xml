@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.11</version>
+		<version>3.4.12</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.abnerkaizer</groupId>
@@ -20,8 +20,9 @@
         <rest-assured.version>5.5.6</rest-assured.version>
         <junit.version>4.13.2</junit.version>
         <commons-csv.version>1.14.1</commons-csv.version>
-        <apache.poi-version>5.4.1</apache.poi-version>
+        <apache.poi-version>5.5.1</apache.poi-version>
         <jasperreports-version>7.0.3</jasperreports-version>
+        <zxing-version>3.5.4</zxing-version>
 	</properties>
 	<dependencies>
 
@@ -116,6 +117,20 @@
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports-pdf</artifactId>
             <version>${jasperreports-version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${zxing-version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>${zxing-version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->

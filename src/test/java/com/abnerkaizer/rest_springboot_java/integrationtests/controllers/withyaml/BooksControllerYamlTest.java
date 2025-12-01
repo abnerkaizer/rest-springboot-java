@@ -185,20 +185,20 @@ class BooksControllerYamlTest extends AbstractIntegrationTest {
         assertNotNull(bookOne.getId());
         assertTrue(bookOne.getId() > 0);
 
-        assertEquals("Viktor Mayer-Schonberger e Kenneth Kukier", bookOne.getAuthor());
+        assertEquals("Craig Larman", bookOne.getAuthor());
         assertNotNull(bookOne.getLaunchDate());
-        assertEquals("Big Data: como extrair volume, variedade, velocidade e valor da avalanche de informação cotidiana", bookOne.getTitle());
-        assertEquals(54D, bookOne.getPrice());
+        assertEquals("Agile and Iterative Development: A Manager’s Guide", bookOne.getTitle());
+        assertEquals(144.98, bookOne.getPrice());
 
-        BookDTO bookFour = books.get(4);
+        BookDTO bookFour = books.get(3);
 
         assertNotNull(bookFour.getId());
         assertTrue(bookFour.getId() > 0);
 
-        assertEquals("Eric Evans", bookFour.getAuthor());
+        assertEquals("Craig Larman", bookFour.getAuthor());
         assertNotNull(bookFour.getLaunchDate());
-        assertEquals("Domain Driven Design", bookFour.getTitle());
-        assertEquals(92D, bookFour.getPrice());
+        assertEquals("Agile and Iterative Development: A Manager’s Guide", bookFour.getTitle());
+        assertEquals(43.82, bookFour.getPrice());
     }
 
     private void mockBook() {

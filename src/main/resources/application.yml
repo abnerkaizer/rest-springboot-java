@@ -26,6 +26,10 @@ spring:
 logging:
   level:
     root: INFO
+#    net:
+#      sf:
+#        jasperreports:
+#          engine.*: TRACE
 #    com.abnerkaizer.rest_springboot_java: DEBUG
 spring-doc:
   paths-to-match: /api/**/v1/**
