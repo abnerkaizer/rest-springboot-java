@@ -7,7 +7,6 @@ import com.abnerkaizer.rest_springboot_java.repository.PeopleRepository;
 import com.abnerkaizer.rest_springboot_java.service.PeopleService;
 import com.abnerkaizer.rest_springboot_java.unittests.mapper.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +23,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedModel;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
