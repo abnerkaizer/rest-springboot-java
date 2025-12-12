@@ -2,6 +2,11 @@ cors:
   originPatterns: http://localhost:8080,http://localhost:3000,https://abnerkaizer.com
 file:
   upload-dir: /home/abner/Projects/UploadDir
+security:
+  jwt:
+    token:
+      secret-key: 53cr37
+      expire-length: 3600000
 email:
   subject: "Default Subject"
   message: "Default Message"
@@ -44,6 +49,8 @@ logging:
 #          engine.*: TRACE
 #    com.abnerkaizer.rest_springboot_java: DEBUG
 spring-doc:
-  paths-to-match: /api/**/v1/**
+  paths-to-match:
+    - /api/**/v1/**
+    - /auth/**
   swagger-ui:
     use-root-path: true
