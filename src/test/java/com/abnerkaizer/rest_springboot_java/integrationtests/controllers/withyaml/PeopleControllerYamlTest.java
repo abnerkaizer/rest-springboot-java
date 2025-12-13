@@ -55,7 +55,9 @@ class PeopleControllerYamlTest extends AbstractIntegrationTest {
                 .addFilter(new RequestLoggingFilter(LogDetail.ALL))
                 .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
                 .build();
+
         var yamlBody = ymlMapper.writeValueAsString(person);
+
         var content = given(specification)
                 .contentType(MediaType.APPLICATION_YAML_VALUE)
                 .body(yamlBody)
