@@ -1,7 +1,9 @@
 package com.abnerkaizer.rest_springboot_java.integrationtests.controllers.withjson;
 
 import com.abnerkaizer.rest_springboot_java.config.TestConfigs;
+import com.abnerkaizer.rest_springboot_java.integrationtests.dto.AccountCredentialsDTO;
 import com.abnerkaizer.rest_springboot_java.integrationtests.dto.PersonDTO;
+import com.abnerkaizer.rest_springboot_java.integrationtests.dto.TokenDTO;
 import com.abnerkaizer.rest_springboot_java.integrationtests.dto.wrappers.json.WrapperPersonDTO;
 import com.abnerkaizer.rest_springboot_java.integrationtests.testcontainers.AbstractIntegrationTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -30,6 +32,7 @@ class PeopleControllerJsonTest extends AbstractIntegrationTest {
     private static ObjectMapper objectMapper;
 
     private static PersonDTO person;
+    private static TokenDTO token;
 
     @BeforeAll
     static void setUp() {
@@ -37,6 +40,27 @@ class PeopleControllerJsonTest extends AbstractIntegrationTest {
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
         person = new PersonDTO();
+        token = new TokenDTO();
+    }
+
+    @Test
+    @Order(0)
+    void signIn() {
+        AccountCredentialsDTO credentials = new AccountCredentialsDTO("abner", "admin123");
+        token = given()
+                .basePath("/auth/signin")
+                .port(TestConfigs.SERVER_PORT)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(credentials)
+                .when()
+                .post()
+                .then()
+                .statusCode(200)
+                .extract()
+                .body()
+                .as(TokenDTO.class);
+        assertNotNull(token.getAccessToken());
+        assertNotNull(token.getRefreshToken());
     }
 
     @Test
@@ -46,6 +70,7 @@ class PeopleControllerJsonTest extends AbstractIntegrationTest {
 
         specification = new RequestSpecBuilder()
                 .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_ABNERKAIZER)
+                .addHeader(TestConfigs.HEADER_PARAM_AUTH, "Bearer "+ token.getAccessToken())
                 .setBasePath("/api/people/v1")
                 .setPort(TestConfigs.SERVER_PORT)
                 .addFilter(new RequestLoggingFilter(LogDetail.ALL))
