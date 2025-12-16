@@ -1,5 +1,5 @@
 server.port:
-  80
+  8080
 cors:
   originPatterns: http://localhost:8080,http://localhost:3000,https://abnerkaizer.com
 file:
@@ -45,11 +45,6 @@ spring:
 logging:
   level:
     root: INFO
-#    net:
-#      sf:
-#        jasperreports:
-#          engine.*: TRACE
-#    com.abnerkaizer.rest_springboot_java: DEBUG
 spring-doc:
   paths-to-match:
     - /api/**/v1/**
