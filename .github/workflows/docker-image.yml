@@ -23,7 +23,6 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: '21'
-        cache: maven
 
     - name: Build Application .jar
       run: mvn clean package
