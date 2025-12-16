@@ -30,5 +30,12 @@ jobs:
       run: mvn clean package
 
     - name: Docker Compose Build
+      working-directory: ./
+      run: docker compose build
 
     - name: Push to Docker Hub Container Registry
+      run: |
+        docker tag ${{secrets.DOCKER_USERNAME}}/rest-springboot-java:latest ${{secrets.DOCKER_USERNAME}}/rest-springboot-java:${{ github.run_id }}
+        
+        docker push ${{secrets.DOCKER_USERNAME}}/rest-springboot-java:latest
+        docker push ${{secrets.DOCKER_USERNAME}}/rest-springboot-java:${{ github.run_id }}
