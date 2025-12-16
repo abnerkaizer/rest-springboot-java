@@ -1,7 +1,5 @@
-FROM gcr.io/distroless/java21-debian13
+FROM eclipse-temurin:21-jdk-alpine
 
 COPY target/*.jar /app.jar
-
-EXPOSE 80
 
 ENTRYPOINT ["java", "-jar", "/app.jar"]
